@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "watch": "npx nodemon server.js",
-    "seed": "node /utils/seed"
+    "seed": "node --trace-warnings ./utils/seed.js"
   },
   "repository": {
     "type": "git",
