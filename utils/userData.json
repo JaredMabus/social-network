@@ -1,0 +1,22 @@
+[
+    {
+        "username": "Gandalf",
+        "email": "gandalf@middleearth.com"
+    },
+    {
+        "username": "Saruman",
+        "email": "saruman@middleearth.com"
+    },
+    {
+        "username": "Frodo",
+        "email": "frodo@middleearth.com"
+    },
+    {
+        "username": "Pippin",
+        "email": "pippin@middleearth.com"
+    },
+    {
+        "username": "Gladriel",
+        "email": "gladriel@middleearth.com"
+    }
+]
