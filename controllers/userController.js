@@ -25,6 +25,30 @@ module.exports = {
             throw err
         }
     },
+    async addFriend(userId, friendId) {
+        try {
+            let newUser = await User.findByIdAndUpdate(
+                ObjectId(userId),
+                { $addToSet: { friends: friendId } },
+                { new: true }
+            )
+            return newUser;
+        } catch (err) {
+            throw err
+        }
+    },
+    async deleteFriend(userId, friendId) {
+        try {
+            let newUser = await User.findByIdAndUpdate(
+                ObjectId(userId),
+                { $pull: { friends: friendId } },
+                { new: true }
+            )
+            return newUser;
+        } catch (err) {
+            throw err
+        }
+    },
     async updateUser(id, data) {
         try {
             let newUser = await User.findByIdAndUpdate(ObjectId(id), data, { new: true });

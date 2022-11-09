@@ -12,13 +12,12 @@ const seedDatabase = async () => {
             const hasThoughts = await Thought.find({});
 
             // Clear User and Thought data if exist
-            if (hasUserData.length > 0 && hasThoughts.length > 0) {
+            if (hasUserData.length > 0 || hasThoughts.length > 0) {
                 await User.deleteMany({});
                 await Thought.deleteMany({});
             }
 
             await User.insertMany(userData);
-            await Thought.insertMany(thoughtData);
 
             // Get users and add 2 random friends from the User collection
             const friendUserData = await User.find({});
