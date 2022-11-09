@@ -22,8 +22,6 @@ const userSchema = new Schema({
   },
 })
 
-
-// TO-DO: Create a virtual "friendCount" to get length of user's friends array
 userSchema
   .virtual('friendCount')
   .get(function () {

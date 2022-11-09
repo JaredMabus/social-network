@@ -60,6 +60,11 @@ module.exports = {
     async deleteUser(id) {
         try {
             let deleteUser = await User.findByIdAndDelete(ObjectId(id));
+            if (deleteUser) {
+                await Thought.deleteMany(
+                    { 'username': deleteUser.username }
+                );
+            }
             return deleteUser;
         } catch (err) {
             throw err
