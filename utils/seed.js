@@ -5,8 +5,6 @@ const thoughtData = require('./thoughtData.json');
 const { Types } = require('mongoose')
 
 
-
-
 const seedDatabase = async () => {
     try {
         db.once('open', async () => {
@@ -14,29 +12,31 @@ const seedDatabase = async () => {
             const hasThoughts = await Thought.find({});
 
             // Clear User and Thought data if exist
-            if (hasUserData.length > 0 && hasThoughts.length > 0) {
+            if (hasUserData.length > 0 || hasThoughts.length > 0) {
                 await User.deleteMany({});
                 await Thought.deleteMany({});
             }
 
             await User.insertMany(userData);
-            await Thought.insertMany(thoughtData);
 
             // Get users and add 2 random friends from the User collection
             const friendUserData = await User.find({});
             const userDataWithFriends = [];
 
-            // append two friends to each user object
+            // Append friends to each user object
             for await (let user of friendUserData) {
                 let friendsData = await User.aggregate([{ $sample: { size: 2 } }]);
 
                 friendsData.forEach(friend => {
-                    user.friends.push(Types.ObjectId(friend._id))
+                    if (friend._id.toString() !== user._id.toString()) {
+                        user.friends.push(Types.ObjectId(friend._id))
+                    };
+
                 });
                 userDataWithFriends.push(user);
             };
 
-            // update each user in the User collection
+            // Update each user in the User collection
             for await (let user of userDataWithFriends) {
                 await User.updateOne({ _id: Types.ObjectId(user._id) }, {
                     $push:

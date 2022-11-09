@@ -1,10 +1,10 @@
 [
     {
        "thoughtText": "Missing my pipe, please let me know if anyone finds it!",
-       "userName": "Gandalf"
+       "username": "Gandalf"
     },
-    {
-       "thoughtText": "Looking for a ride-share to Mordor.",
-       "userName": "Frodo"
-    }
+   {
+      "thoughtText": "Looking for a ride-share to Mordor.",
+      "username": "Frodo"
+   }
 ]
