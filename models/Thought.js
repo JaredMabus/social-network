@@ -36,14 +36,12 @@ const thoughtSchema = new Schema({
   },
 })
 
-// TO-DO: Create getter function to format date
 thoughtSchema
   .virtual('formatDate')
   .get(function () {
-    return this.createAt;
+    return this.createAt.toLocaleDateString('en-US');
   });
 
-// TO-DO: Create a virtual "reactionCount" to get length of thought's reactions array
 thoughtSchema
   .virtual('reactionCount')
   .get(function () {
