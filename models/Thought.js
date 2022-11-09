@@ -23,7 +23,8 @@ const thoughtSchema = new Schema({
   },
   createAt: {
     type: Date,
-    default: Date.now()
+    default: Date.now(),
+    get: (date) => `${date.toLocaleDateString('en-US')} ${date.toLocaleTimeString()}`
   },
   username: {
     type: String,
@@ -33,14 +34,9 @@ const thoughtSchema = new Schema({
 }, {
   toJSON: {
     virtuals: true,
+    getters: true
   },
 })
-
-thoughtSchema
-  .virtual('formatDate')
-  .get(function () {
-    return this.createAt.toLocaleDateString('en-US');
-  });
 
 thoughtSchema
   .virtual('reactionCount')
