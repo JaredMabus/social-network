@@ -47,6 +47,14 @@ module.exports = {
     async deleteThought(id) {
         try {
             let deleteThought = await Thought.findByIdAndDelete(ObjectId(id));
+            if (deleteThought) {
+                console.log(deleteThought)
+                await User.findOneAndUpdate(
+                    { username: deleteThought.username },
+                    { $pull: { thoughts: ObjectId(id) } },
+                    { new: true }
+                )
+            };
             return deleteThought;
         } catch (err) {
             throw err

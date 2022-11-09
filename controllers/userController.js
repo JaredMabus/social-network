@@ -39,20 +39,20 @@ module.exports = {
     },
     async deleteFriend(userId, friendId) {
         try {
-            let newUser = await User.findByIdAndUpdate(
+            let deletedFriend = await User.findByIdAndUpdate(
                 ObjectId(userId),
                 { $pull: { friends: friendId } },
                 { new: true }
             )
-            return newUser;
+            return deletedFriend;
         } catch (err) {
             throw err
         }
     },
     async updateUser(id, data) {
         try {
-            let newUser = await User.findByIdAndUpdate(ObjectId(id), data, { new: true });
-            return newUser;
+            let updateUser = await User.findByIdAndUpdate(ObjectId(id), data, { new: true });
+            return updateUser;
         } catch (err) {
             throw err
         }
